@@ -44,4 +44,17 @@
  3. Install jbuilder gem for generating Json
     - [add: gem 'jbuilder' into Gemfile](https://github.com/rails/jbuilder)
 ## Config
-TODO
+ 1. In controller I wanna use **API** instead of **Api** so i have to config as below
+ _config/intializer/inflections.rb_
+ ```
+ ActiveSupport::Inflector.inflections(:en) do |inflect| 
+  inflect.acronym 'API'
+ end
+ ```
+ 2. I wanna overrdide token_controllers proper
+ _config/routes.rb_
+ ```
+ use_doorkeeper do
+  controllers(token: 'doorkeeper/custom_tokens')
+ end
+ ```
