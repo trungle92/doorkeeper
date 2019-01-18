@@ -1,5 +1,5 @@
 ## NOTE
- 1. I assume you know how oauth work :D
+ 1. I assume that you know how oauth work :D
  2. With purpose is help you understand how oauth work in api rails application with devise and doorkeeper, so i just install and configure basically.
  3. If you want to be more please access them pages. 
  #
@@ -51,10 +51,36 @@
   inflect.acronym 'API'
  end
  ```
- 2. I wanna overrdide token_controllers proper
+ 2. I wanna overrdide token_controllers
  _config/routes.rb_
  ```
  use_doorkeeper do
   controllers(token: 'doorkeeper/custom_tokens')
  end
  ```
+ 3. Create doorkeeper/custom_tokens.rb and write a few lines code
+ ```
+rails g controller doorkeeper/custom_tokens --no-helper --no-assets --no-controller-specs --no-view-specs
+ ```
+ 4. Create api/base_controller.rb and write a few lines code
+```
+rails g controller api/base  --no-helper --no-assets --no-controller-specs --no-view-specs
+```
+5. Create app/views/api/layouts/base.json.jbuilder and write a few lines code
+6. Create api/v1/info_controller.rb
+7. Create app/controllers/concerns/api/rendering.rb for rendering data
+8. Create app/models/api_status.rb for rendering message and code
+#
+## demo some cases
+1. Use postman or browser
+-> get /api/v1/mine -> response errors 
+```
+  {
+    status: "User unauthenticated",
+    status_code: 1004,
+    message: "The access token is invalid",
+    timestamp: 1547807156,
+    data: null
+  }
+```
+2. Register a new user
